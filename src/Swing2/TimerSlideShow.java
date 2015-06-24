@@ -11,6 +11,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,8 +24,9 @@ import javax.swing.Timer;
 public class TimerSlideShow extends JFrame{
     Timer tmr;
     JLabel lblimg,lblTitle;
-    JPanel pnlimg,pnlTitle;
+    JPanel pnlimg,pnlTitle,pnlBtn;
     ImageIcon icon[];
+    JButton btnStart,btnStop;
     int i=0;
 
     public TimerSlideShow() throws HeadlessException {
@@ -63,6 +65,30 @@ public class TimerSlideShow extends JFrame{
             }
         });
         tmr.start();
+        
+        btnStart=new JButton("Start");
+        btnStop=new JButton("Stop");
+        pnlBtn=new JPanel();
+        pnlBtn.setPreferredSize(new Dimension(500, 100));
+        pnlBtn.add(btnStart);
+        pnlBtn.add(btnStop);
+        getContentPane().add(pnlBtn);
+        
+        btnStart.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+         tmr.start();
+            }
+        });
+        
+        btnStop.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+         tmr.stop();
+            }
+        });
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
