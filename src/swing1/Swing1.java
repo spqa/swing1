@@ -83,8 +83,8 @@ public class Swing1 extends JFrame {
                     PreparedStatement pre=s.getConn().prepareStatement(sql);
                     pre.setString(1, txtUser.getText());
                     pre.setString(2, String.valueOf(txtPass.getPassword()));          
-                    rs= pre.getResultSet();
-                    if(rs!=null){
+                    rs= pre.executeQuery();
+                    if(rs.next()){
                         JOptionPane.showMessageDialog(null, "successfully!!");
                     }else{
                         JOptionPane.showMessageDialog(null, "wrong input");
