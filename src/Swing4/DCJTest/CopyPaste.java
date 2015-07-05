@@ -11,10 +11,13 @@ import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -23,8 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.text.JTextComponent;
-
 
 /**
  *
@@ -45,7 +48,10 @@ public class CopyPaste extends JFrame {
         setSize(500, 500);
         setLayout(new FlowLayout());
         mnFile = new JMenu("File");
+
         fCopy = new JMenuItem("copy");
+//        fCopy.setAccelerator( KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK));
+        fCopy.setAccelerator(KeyStroke.getKeyStroke("control alt F "));
         fCut = new JMenuItem("Cut");
         fPaste = new JMenuItem("Paste");
         mnFile.add(fCut);
@@ -73,8 +79,8 @@ public class CopyPaste extends JFrame {
         txt2.setComponentPopupMenu(pmnmenu);
 //        popupListener pop = new popupListener();
 //        addMouseListener(pop);
-        
-        txtField=new JTextField();
+
+        txtField = new JTextField();
         txtField.setPreferredSize(new Dimension(450, 50));
         txtField.setComponentPopupMenu(pmnmenu);
         getContentPane().add(txtField);
@@ -102,7 +108,7 @@ public class CopyPaste extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTextComponent cp= (JTextComponent) pmnmenu.getInvoker();
+                JTextComponent cp = (JTextComponent) pmnmenu.getInvoker();
                 clipBoard = cp.getSelectedText();
                 System.out.println(pmnmenu.getInvoker().getName());
             }
@@ -112,7 +118,7 @@ public class CopyPaste extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTextComponent temp=(JTextComponent) pmnmenu.getInvoker();
+                JTextComponent temp = (JTextComponent) pmnmenu.getInvoker();
                 temp.replaceSelection(clipBoard);
             }
         });
@@ -121,12 +127,18 @@ public class CopyPaste extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTextComponent temp=(JTextComponent) pmnmenu.getInvoker();
+                JTextComponent temp = (JTextComponent) pmnmenu.getInvoker();
                 clipBoard = temp.getSelectedText();
                 temp.replaceSelection("");
             }
         });
-        
+        fCopy.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "allalal");
+            }
+        });
 
     }
 //    class popupListener extends MouseAdapter{
