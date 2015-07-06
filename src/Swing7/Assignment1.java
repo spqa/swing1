@@ -205,8 +205,14 @@ public class Assignment1 extends JFrame {
         lblAddStudent.setText(rs.getString("AddStudent"));
         lblList.setText(rs.getString("StudentList"));
         btnAdd.setText(rs.getString("AddStudent"));
-        
-        
+        dataTbl=new DefaultTableModel();
+        dataTbl.addColumn(rs.getString("id"));
+        dataTbl.addColumn(rs.getString("Name"));
+        dataTbl.addColumn(rs.getString("BirthDay"));
+        for (Student arrStudent1 : arrStudent) {
+            dataTbl.addRow(arrStudent1.getStringArr());
+        }
+        tblStudent.setModel(dataTbl);
     }
 
     public static void main(String[] args) throws HeadlessException, ParseException {
